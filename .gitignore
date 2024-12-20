@@ -1,2 +1,3 @@
-Scripts/img.jpeg
-Scripts/poz1.jpeg
+Scripts/*.jpg
+Scripts/*.png
+Scripts/*.jpeg
