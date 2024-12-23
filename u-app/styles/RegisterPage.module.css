@@ -1,0 +1,141 @@
+.register {
+    position: fixed; /* Fixes the position on the screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url('../public/assets/utcn.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire screen */
+    overflow: hidden; /* Prevents scrolling */
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items within the form */
+    gap: 20px;
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+    width: 100%;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    border-color: white;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 247, 247, 0.4);
+}
+
+.label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border: 2px dashed #ccc; /* Example border for the label (if desired) */
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.label:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Darken on hover */
+}
+
+.labelImg {
+    width: 100%;
+    max-width: 200px; /* Ensure image doesn't overflow */
+    max-height: 175px;
+    height: auto;
+}
+
+.defaultImage {
+    max-height: 50px;  /* Make the default image smaller */
+    width: auto;
+    object-fit: contain;
+}
+
+.button {
+    padding: 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.button:hover {
+    background-color: darkred;
+}
+
+.link {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: #0056b3;
+}
+
+.hiddenfileinput {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.error_message {
+    color: red;
+    font-weight: bold;
+    z-index: 99999;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.header {
+    font-size: 3rem; /* Large font size */
+    font-weight: bold;
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); 
+   
+}
