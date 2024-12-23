@@ -1,0 +1,148 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: #fffefe;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    
+}
+.navbarWrapper {
+    max-width: 1200px; /* Set a maximum width */
+    margin: 0 auto; /* Center it on the page */
+    width: 100%;
+}
+
+.img {
+    height: 75px; 
+    width: 70px;
+    margin-bottom: -20px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    flex-direction: row;
+    margin-left: 10px; 
+}
+
+.search input {
+    padding: 10px 20px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    color: black;
+    outline: none;
+    width: 350px; 
+    transition: all 0.3s ease;
+}
+
+.search input:focus {
+    border-color: gray;
+}
+
+.searchButton {
+    justify-content: center;
+    align-items: center;
+    padding: 10px; 
+    cursor: pointer;
+    width: 60px;
+  
+}
+
+.options {
+    display: flex;
+    gap: 70px; 
+}
+
+.options a {
+    padding: 10px 20px; 
+    text-decoration: none; 
+    white-space: nowrap; 
+    transition: all 0.3s ease; 
+    color: black;
+    border: 1px solid gray;
+    margin-top: auto;
+    border-radius: 20px;
+    transform: translateY(-7px);
+}
+
+.options a:hover {
+    color: black;
+    background-color: #f8f8f8; 
+    scale: 1.05;
+}
+
+.dropdown_menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid white; /* Light grey border on hover */
+    border-radius: 40px; /* Rounded corners for the border */
+    gap: 10px;
+}
+
+.dropdown_menu img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover; /* Keep the image ratio */
+    cursor: pointer;
+}
+
+.dropdown_menu svg {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.dropdown_menu:hover,
+.dropdown_menu:focus,
+.dropdown_menu:active {
+    background: none;
+}
+
+.accountmenu {
+    position: absolute;
+    background-color: white;
+    right: 60px;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px 0;
+    border: 1px solid white; 
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Assuming this was your shadow mixin */
+    z-index: 9999;
+}
+
+@media (max-width: 600px) {
+    .accountmenu {
+        right: 20px; /* Adjust for smaller screens */
+    }
+}
+
+.accountmenu a {
+    display: block; /* Ensures the element takes up full width of its container */
+    width: 100%;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    border: none;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.accountmenu a:hover {
+    scale: 1.05;
+}
+
