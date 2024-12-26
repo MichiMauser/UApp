@@ -13,7 +13,7 @@ async function postData(formData){
     // for (const [key, value] of formData.entries()) {
     //     console.log(`${key}:`, value);
     // }
-    const response = await fetch('http://172.20.10.5:8000/register_login/register/', {
+    const response = await fetch('http://127.0.0.1:8000/register_login/register/', {
       method: 'POST',
       body: formData
     })
@@ -43,7 +43,7 @@ export default function RegisterPage() {
     const {mutate, error, isError, isPending} = useMutation({
         mutationFn: postData,
         onSuccess: () => {
-                console.log("Success!");
+                // console.log("Success!");
                 router.push('/')
             }
       })
