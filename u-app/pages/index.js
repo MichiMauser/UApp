@@ -7,7 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 async function postData(data) {
-  const response = await fetch('http://172.20.10.5:8000/register_login/login/', {
+  const response = await fetch('http://127.0.0.1:8000/register_login/login/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

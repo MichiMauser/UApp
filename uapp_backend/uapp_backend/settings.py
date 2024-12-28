@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'register_login',
+    'w_machine',
     'corsheaders',
 ]
 
@@ -82,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'uapp_database',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'rootadmin',
         'HOST': 'localhost',
         'PORT': '3306'
     }
