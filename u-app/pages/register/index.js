@@ -43,7 +43,7 @@ export default function RegisterPage() {
     const {mutate, error, isError, isPending} = useMutation({
         mutationFn: postData,
         onSuccess: () => {
-                console.log("Success!");
+                // console.log("Success!");
                 router.push('/')
             }
       })

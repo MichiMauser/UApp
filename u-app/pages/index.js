@@ -85,7 +85,6 @@ export default function Login() {
         <form className={classes.form} onSubmit={handleSubmit}>
           <input className={classes.input} placeholder="Username" name="username" required type="text" />
           <input className={classes.input} placeholder="Password" name="password" required type="password" />
-
           <motion.button whileHover={{ scale: 1.05 }} transition={{ type: 'tween' }} className={classes.button} disabled={isPending}>
             {isPending ? "Logging In" : "Login"}
           </motion.button>
