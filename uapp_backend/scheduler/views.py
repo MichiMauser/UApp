@@ -6,7 +6,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(checkSlots, 'interval', minutes=5)
+    scheduler.add_job(checkSlots, 'interval', minutes=1)
     scheduler.start()
 
 
