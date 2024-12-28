@@ -1,9 +1,16 @@
-from background_task import background
 from parking_func.models import ParkingRequest, ParkingSlots
 from django.utils import timezone
+from apscheduler.schedulers.background import BackgroundScheduler
 
-@background(schedule=40)
-def handle(self, *args, **kwargs):
+# Create your views here.
+
+def start():
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(checkSlots, 'interval', minutes=5)
+    scheduler.start()
+
+
+def checkSlots():
     all_slots = ParkingSlots.objects.all()
     print("yesss")
     for slot in all_slots:
@@ -30,14 +37,11 @@ def handle(self, *args, **kwargs):
                     pending_request.status = 'Accepted'
                     pending_request.save()
 
-                    self.stdout.write(self.style.SUCCESS(
-                        f'Successfully updated parking slot {slot.id} with customer {pending_request.student_name}.'
-                    ))
+                    print(f'Successfully updated parking slot {slot.id} with customer {pending_request.student_name}.')
                 else:
-                    self.stdout.write(self.style.SUCCESS(
-                        f'Slot {slot.id} remains available, no valid requests for today.'))
+                    print(f'Slot {slot.id} remains available, no valid requests for today.')
 
-            self.stdout.write(self.style.SUCCESS(f'Checked parking slot {slot.id} successfully.'))
+            print(f'Checked parking slot {slot.id} successfully.')
 
         except Exception as e:
-            self.stdout.write(self.style.ERROR(f"Error processing parking slot {slot.id}: {str(e)}"))
+            print(f"Error processing parking slot {slot.id}: {str(e)}")
