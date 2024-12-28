@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .checkExpiryParkingSlots import handle
+# from .checkExpiryParkingSlots import handle
 
 urlpatterns = [
     path('createRequestForParkingSpace/', views.createRequest, name='createRequest'),
@@ -9,4 +9,4 @@ urlpatterns = [
     path('getRequests/', views.getRequests, name='getRequests'),
     ]
 
-handle()
+# handle()

@@ -39,11 +39,6 @@ def make_reservation(request):
         except ValidationError as e:
             return Response({'success': False, 'error': f"{e}"}, status=status.HTTP_409_CONFLICT)
         
-from django.http import HttpResponse
-from django.shortcuts import render
-
-
-
 @api_view(['DELETE'])
 def delete_reservation(request):
     
@@ -61,6 +56,19 @@ def delete_reservation(request):
 
         reservation.delete()
         return Response({"success": True, "deletion": f"Successfully deleted the reservation for the time slot {time_slot}"}, status=status.HTTP_200_OK)
+
+
+
+
+@api_view(['GET'])
+def get_reservations(request):
+    
+    if request.method == 'GET':
+        
+        booked_time_slots = Booking.objects.all()
+        serialized_booked = BookingSerializer(booked_time_slots, many= True)
+        return Response(serialized_booked.data, status= status.HTTP_200_OK)
+
 def index(reqeust):
     return HttpResponse("Index for washing machine")
 

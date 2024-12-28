@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'w_machine',
     'parking_func',
     'corsheaders',
-    'background_task',
+    # 'background_task',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'uapp_database',
         'USER': 'root',
-        'PASSWORD': 'chanagepassord',  #CHANGED BECAUSE CONFLICTS ON MERGE
+        'PASSWORD': 'rootadmin',  #CHANGED BECAUSE CONFLICTS ON MERGE
         'HOST': 'localhost',
         'PORT': '3306'
     }
