@@ -8,7 +8,6 @@ export default function DropDownMenu(){
         <Link href={'/home'}>Parking reservations</Link>
         <Link href={'/home'}>Conversations</Link>
         <Link href={'/home/washing_machine'}>Washing machine</Link>
-        <Link href={'/'}>Log Out</Link>
-
+        <Link href={'/logout'}>Log Out</Link>
     </motion.div>
 }

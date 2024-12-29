@@ -37,7 +37,6 @@ def register(request):
             return Response({'success': False, 'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
         parsed_data = parseFile(file)
-
         # Create the user
         user = User(
             username=username,

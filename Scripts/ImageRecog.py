@@ -1,7 +1,6 @@
 
 import pytesseract
 from PIL import Image, ImageFilter
-import cv2
 import numpy as np
 import random
 pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files/Tesseract-OCR/tesseract.exe"

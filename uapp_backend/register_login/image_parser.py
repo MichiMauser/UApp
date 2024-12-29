@@ -1,6 +1,6 @@
 import pytesseract
 from PIL import Image, ImageFilter
-import cv2
+# import cv2
 import numpy as np
 import random
 

@@ -45,9 +45,22 @@ export default async function middleware(req) {
       return NextResponse.redirect(new URL('/', req.nextUrl));
     }
   }
-  console.log(session)
+  // console.log(session)
 
   try {
+    if(req.nextUrl.pathname.startsWith('/logout') && payloadUser?.user.role){
+        const response = NextResponse.redirect(new URL('/', req.nextUrl))
+        response.cookies.set("token", "",
+          {
+            expires: new Date(0),
+            path:'/',
+            sameSite:'lax'
+          }
+        )
+        console.log("Response cookies:", response.cookies.getAll());
+        return response;
+    }
+
     if (isProtectedRoute && !payloadUser?.user) {
       return NextResponse.redirect(new URL('/', req.nextUrl));
     }
@@ -61,9 +74,16 @@ export default async function middleware(req) {
       return NextResponse.redirect(new URL('/adminDashboard', req.nextUrl));
     }
 
-    if (req.nextUrl.pathname.startsWith('/home') && payloadUser?.user.role === "Student") {
-      return NextResponse.next();
-    } else if (req.nextUrl.pathname.startsWith('/adminDashboard') && payloadUser?.user.role === "Admin") {
+    if (req.nextUrl.pathname.startsWith('/adminDashboard') && payloadUser?.user.role === "Student") {
+      return NextResponse.redirect(new URL('/home', req.nextUrl));
+    }
+
+    if (req.nextUrl.pathname.startsWith('/home') && payloadUser?.user.role === "Admin") {
+      return NextResponse.redirect(new URL('/adminDashboard', req.nextUrl));
+    }
+
+    if ((req.nextUrl.pathname.startsWith('/adminDashboard') && payloadUser?.user.role === "Admin")
+       || (req.nextUrl.pathname.startsWith('/home') && payloadUser?.user.role === "Student")) {
       return NextResponse.next();
     }
   } catch (error) {
