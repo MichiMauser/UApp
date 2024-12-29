@@ -1,0 +1,162 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f9f9f9;
+}
+
+.header {
+    display: flex;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.day { 
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;  
+    cursor: pointer;
+}
+
+.day:hover {
+    background-color: #e0e0e0;
+}
+
+.highlight {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.time {
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.cell {
+    flex: 1;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.reserved {
+    background-color: rgb(136, 228, 236);
+    color: white;
+    cursor: not-allowed;
+}
+
+.myReserved {
+    background-color: rgb(86, 223, 111);
+    color: white;
+    cursor: alias
+}
+
+.cell:hover {
+    background-color: #9cc4d6;
+}
+
+.cell:last-child {
+    border-right: none;
+}
+
+.weekNavContainer {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    height: 5vh; 
+  }
+  
+  /* Change week (top buttons) stuff*/
+.intervalWeekShow {
+    background-color: #5eaaca;
+    border: none;
+    color: white;
+
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px; 
+}
+.button {
+    background-color: #008cc9;
+    border: none;
+    color: white;
+    
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px; 
+}
+  
+.button:hover {
+    background-color: #007bb5;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* modal stuff*/
+.modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+}
+
+.modalButtons {
+    margin-top: 20px;
+}
+
+.modalButtons button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.modalButtons button:first-child {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.modalButtons button:last-child {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
