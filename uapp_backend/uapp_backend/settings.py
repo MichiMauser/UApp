@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'w_machine',
     'parking_func',
     'corsheaders',
-    # 'background_task',
+    'background_task',
+    'django_apscheduler',
+    'scheduler.apps.SchedulerConfig'
 ]
 
 MIDDLEWARE = [
@@ -116,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Bucharest'
 
 USE_I18N = True
 
