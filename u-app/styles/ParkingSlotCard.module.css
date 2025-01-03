@@ -1,0 +1,99 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 slots per row */
+    gap: 16px; /* Space between slots */
+    row-gap: 100px;
+    padding: 20px;
+  }
+  
+  .cardContainer {
+    position: relative;
+    width: 80px; /* Parking slot width */
+    height: 150px; /* Parking slot height */
+    border: 3px solid transparent; /* Default border */
+    border-radius: 12px; /* Smooth corners */
+    background-color: #f5f5f5; /* Subtle slot background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border 0.3s ease, transform 0.3s ease;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .cardContainer:hover {
+    transform: scale(1.05); /* Slight scaling on hover */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333; /* Darker text for better contrast */
+  }
+  
+  .taken {
+    border-color: #e74c3c; /* Bright red for taken slots */
+    background-color: #fbeaea; /* Light red background for better feedback */
+  }
+  
+  .available {
+    border-color: #27ae60; /* Bright green for available slots */
+    background-color: #eafaf1; /* Light green background for better feedback */
+  }
+
+  .pending {
+    border-color: #f1c40f; /* Bright yellow for pending slots */
+    background-color: #fef9e7; /* Light yellow background for subtle feedback */
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .closeModal {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .reserveButton {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .reserveButton:hover {
+    background: #1e8449;
+  }
+  
+
+  
+  
