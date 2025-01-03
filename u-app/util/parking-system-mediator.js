@@ -14,7 +14,7 @@ class ParkingSystemMediator {
         } else if(val == 1) {
           return "Pending"
         } else {
-          return "Occupied"
+          return "Taken"
         }
       }
       try {
@@ -34,6 +34,62 @@ class ParkingSystemMediator {
     async fetchPendingRequests() {
       try {
         const requests = await this.parkingSlotService.getRequests();
+        // let requests = [
+        //   {
+        //     "id": 1,
+        //     "parking_slot_number": 101,
+        //     "student_name": "John Doe",
+        //     "registration_plate": "XYZ-1234",
+        //     "start_date": "2025-01-10",
+        //     "nr_of_days": 5,
+        //     "status": "pending"
+        //   },
+        //   {
+        //     "id": 2,
+        //     "parking_slot_number": 102,
+        //     "student_name": "Jane Smith",
+        //     "registration_plate": "ABC-5678",
+        //     "start_date": "2025-01-15",
+        //     "nr_of_days": 3,
+        //     "status": "pending"
+        //   },
+        //   {
+        //     "id": 3,
+        //     "parking_slot_number": 103,
+        //     "student_name": "Alice Brown",
+        //     "registration_plate": "LMN-9012",
+        //     "start_date": "2025-02-01",
+        //     "nr_of_days": 7,
+        //     "status": "pending"
+        //   },
+        //   {
+        //     "id": 4,
+        //     "parking_slot_number": 101,
+        //     "student_name": "John Doe",
+        //     "registration_plate": "XYZ-1234",
+        //     "start_date": "2025-01-10",
+        //     "nr_of_days": 5,
+        //     "status": "approved"
+        //   },
+        //   {
+        //     "id": 5,
+        //     "parking_slot_number": 101,
+        //     "student_name": "John Doe",
+        //     "registration_plate": "XYZ-1234",
+        //     "start_date": "2025-01-10",
+        //     "nr_of_days": 5,
+        //     "status": "denied"
+        //   },
+        //   {
+        //     "id": 6,
+        //     "parking_slot_number": 101,
+        //     "student_name": "John Doe",
+        //     "registration_plate": "XYZ-1234",
+        //     "start_date": "2025-01-10",
+        //     "nr_of_days": 5,
+        //     "status": "approvedPending"
+        //   }
+        // ]
         this.uiHandler.updatePendingRequests(requests);
       } catch (error) {
         console.error('Error fetching pending requests:', error);
@@ -43,13 +99,13 @@ class ParkingSystemMediator {
     // Handle parking request creation
     async createParkingRequest(nrParcare, numeStud, nrInmat, nrZile) {
       try {
-        // const response = await this.parkingSlotService.createRequestForParkingSpace(nrParcare, numeStud, nrInmat, nrZile);
-        // if (response.error) {
-        //   alert(response.error);
-        // } else {
-        //   alert('Request created successfully');
-        //   this.fetchParkingSlots(); // Refresh parking slots to reflect the new request
-        // }
+        const response = await this.parkingSlotService.createRequestForParkingSpace(nrParcare, numeStud, nrInmat, nrZile);
+        if (response.error) {
+          alert(response.error);
+        } else {
+          alert('Request created successfully');
+          this.fetchParkingSlots(); // Refresh parking slots to reflect the new request
+        }
       } catch (error) {
         console.error('Error creating parking request:', error);
       }

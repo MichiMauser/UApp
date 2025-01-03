@@ -11,7 +11,7 @@ export default function ReserveSlot() {
   const [formData, setFormData] = useState({
     licensePlate: '',
     days: 1,
-    startDate: '', // New field for start date
+    startDate: ''
   });
 
   const handleChange = (e) => {
@@ -27,12 +27,13 @@ export default function ReserveSlot() {
         // Pass the startDate along with other data
         await mediator.createParkingRequest(
           number,
-          formData.startDate, // Pass startDate here
+          '',
           formData.licensePlate,
+          formData.startDate,
           formData.days
         );
         alert(`Slot ${number} reserved successfully!`);
-        router.push('/home/parking'); // Navigate back to the parking page
+        router.push('/home/parking');
       } catch (error) {
         console.error('Error during reservation:', error);
       }

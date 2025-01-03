@@ -4,8 +4,8 @@ import { jwtVerify } from 'jose';
 
 const SECRET_KEY = new TextEncoder().encode('razvanricu'); // Use TextEncoder to convert the secret into a buffer
 
-const protectedRoutes = ['/adminDashboard'];
-const publicRoutes = ['/register', '/', '/home'];
+const protectedRoutes = [];
+const publicRoutes = ['/register', '/', '/home', '/adminDashboard'];
 
 export default async function middleware(req) {
   const path = req.nextUrl.pathname;

@@ -1,0 +1,74 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .pageHeader {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .requestsList {
+    margin-top: 20px;
+  }
+  
+  .requestItem {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .requestInfo {
+    margin-bottom: 10px;
+  }
+  
+  .requestInfo div {
+    margin-bottom: 5px;
+  }
+  
+  .slotNumber,
+  .studentName,
+  .registrationPlate,
+  .startDate,
+  .nrOfDays,
+  .status {
+    font-size: 1rem;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .approveButton,
+  .denyButton {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .approveButton {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .denyButton {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .approveButton:hover {
+    background-color: #218838;
+  }
+  
+  .denyButton:hover {
+    background-color: #c82333;
+  }
+  
