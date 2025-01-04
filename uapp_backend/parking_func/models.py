@@ -12,7 +12,6 @@ class ParkingSlots(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
 
-
     def is_reserved(self):
         return self.status == 'Occupied'
 
@@ -33,6 +32,7 @@ class ParkingRequest(models.Model):
     registration_plate = models.CharField(max_length=200, blank=True, null=True, help_text="Registration Plate Number")
     start_date = models.DateField(blank=True, null=True)
     nr_of_days = models.PositiveIntegerField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='pending',
                               help_text="Request Status (approved/denied/pending/approvedPending)")
 

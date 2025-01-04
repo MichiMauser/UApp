@@ -6,7 +6,6 @@ const SECRET_KEY = 'razvanricu';
 export default function handler(req, res) {
   if (req.method === 'POST') {
     const { username, password } = req.body.user;
-    // console.log(req.body)
     if (!username || !password) {
       return res.status(400).json({ message: 'Invalid request body' });
     }

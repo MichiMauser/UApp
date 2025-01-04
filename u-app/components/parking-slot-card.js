@@ -3,9 +3,9 @@ import classes from '../styles/ParkingSlotCard.module.css';
 const ParkingSlotCard = ({ parkingInfos, mediator }) => {
 
     function getCardStyle() {
-        if(parkingInfos.availability == "Available"){
+        if(parkingInfos.status == "Available" || parkingInfos.status == "available" ){
             return classes.available
-        } else if(parkingInfos.availability == "Occupied") {
+        } else if(parkingInfos.status == "Occupied") {
             return classes.taken
         } else {
             return classes.pending
@@ -15,14 +15,14 @@ const ParkingSlotCard = ({ parkingInfos, mediator }) => {
     const handleClick = () => {
       mediator.uiHandler.showModal(parkingInfos);
     };
-
+    // console.log(parkingInfos)
     return (
       <div
         className={`${classes.cardContainer} ${getCardStyle()}`}
         onClick={handleClick}
       >
         <div className={classes.card}>
-          <p>{parkingInfos.number}</p>
+          <p>{parkingInfos.id}</p>
         </div>
       </div>
     );

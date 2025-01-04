@@ -3,10 +3,12 @@ import { useState } from 'react';
 import classes from '../../../../styles/ParkingReserveSlot.module.css';
 import Layout from '../../../../components/layout';
 import mediator from '../../../../util/mediator-instance';
+import { useSelector } from 'react-redux'
 
 export default function ReserveSlot() {
   const router = useRouter();
   const { number } = router.query;
+  const {user} = useSelector((state) => state.user)
 
   const [formData, setFormData] = useState({
     licensePlate: '',
@@ -27,7 +29,7 @@ export default function ReserveSlot() {
         // Pass the startDate along with other data
         await mediator.createParkingRequest(
           number,
-          '',
+          user.username,
           formData.licensePlate,
           formData.startDate,
           formData.days

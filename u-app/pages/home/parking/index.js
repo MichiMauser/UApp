@@ -29,6 +29,7 @@ export default function Parking() {
 
   // Fetch parking slots when the component mounts
   useEffect(() => {
+    
     mediator.fetchParkingSlots();
   }, []);
 
@@ -48,9 +49,9 @@ export default function Parking() {
   return (
     <div className={classes.gridContainer}>
       {/* Render parking lpot cards */}
-      {parkingSlots.map((slot) => (
+      {parkingSlots.map((slot, index) => (
         <ParkingSlotCard
-          key={slot.number}
+          key={index}
           parkingInfos={slot}
           mediator={ mediator }  // Pass mediator to handle click actions
         />

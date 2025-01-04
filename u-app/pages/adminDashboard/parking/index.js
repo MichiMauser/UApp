@@ -10,11 +10,12 @@ export default function ParkingRequests() {
   // This function will be used to update the pending requests list
   mediator.uiHandler.requestsFunction = (requests) => {
     const statusOrder = {
-        pending: 0,
-        approved: 1,
-        approvedPending: 2,
-        denied: 3,
+        Pending: 0,
+        Approved: 1,
+        ApprovedPending: 2,
+        Denied: 3,
       };
+      console.log(requests)
     
       // Sort requests by status using the custom order
       requests.sort((a, b) => {
@@ -80,7 +81,7 @@ export default function ParkingRequests() {
                   <strong>Status:</strong> {request.status}
                 </div>
               </div>
-              {request.status == "pending" && <div>
+              {request.status == "Pending" && <div>
                 <div className={classes.buttons}>
                     <button
                     className={classes.approveButton}

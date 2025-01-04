@@ -8,7 +8,7 @@ const Modal = ({ onClose, slot }) => {
   const handleReserve = () => {
     router.push({
       pathname: '/home/parking/reserve-slot',
-      query: { number: slot.number },
+      query: { number: slot.id },
     });
   };
 
@@ -18,9 +18,9 @@ const Modal = ({ onClose, slot }) => {
         <button className={classes.closeModal} onClick={onClose}>
           X
         </button>
-        <h2>Parking Slot {slot.number}</h2>
-        <p>Status: {slot.availability}</p>
-        {slot.availability == "Available" && <button className={classes.reserveButton} onClick={handleReserve}>
+        <h2>Parking Slot {slot.id}</h2>
+        <p>Status: {slot.status}</p>
+        {(slot.status == "Available" || slot.status == "available") && <button className={classes.reserveButton} onClick={handleReserve}>
           Reserve Slot
         </button>}
       </div>

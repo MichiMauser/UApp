@@ -1,23 +1,25 @@
-let api = 'http://127.0.0.1:8000/parking_func'
+let api = 'http://127.0.0.1:8000/home/parking'
 
 class ParkingSlotService {
   async getParkingSlots() {
-    const response = await fetch(`${api}/getParkingSpots`);
+    const response = await fetch(`${api}`);
     const data = await response.json();
-    return data.success;
+    //console.log(data)
+    return data.requests;
   }
   
   async getRequests() {
     const response = await fetch(`${api}/getRequests`);
     const data = await response.json();
-    return data.success;
+    return data.requests;
   }
 
-  async createRequestForParkingSpace(nrParcare, numeStud, nrInmat, start, nrZile) {
+  async createRequestForParkingSpace(parking_slot_number, student_name, registration_plate, start_date, nr_of_days) {
+    console.log({ parking_slot_number, student_name, registration_plate, start_date, nr_of_days })
     const response = await fetch(`${api}/createRequestForParkingSpace`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nrParcare, numeStud, nrInmat, start, nrZile }),
+      body: JSON.stringify({ parking_slot_number, student_name, registration_plate, start_date, nr_of_days }),
     });
     return await response.json();
   }
