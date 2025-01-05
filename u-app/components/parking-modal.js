@@ -20,9 +20,9 @@ const Modal = ({ onClose, slot }) => {
         </button>
         <h2>Parking Slot {slot.id}</h2>
         <p>Status: {slot.status}</p>
-        {(slot.status == "Available" || slot.status == "available") && <button className={classes.reserveButton} onClick={handleReserve}>
+        <button className={classes.reserveButton} onClick={handleReserve}>
           Reserve Slot
-        </button>}
+        </button>
       </div>
     </div>
   );

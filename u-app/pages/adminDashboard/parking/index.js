@@ -61,42 +61,114 @@ export default function ParkingRequests() {
         {pendingRequests?.length > 0 ? (
           pendingRequests.map((request) => (
             <div key={request.id} className={classes.requestItem}>
-              <div className={classes.requestInfo}>
-                <div className={classes.slotNumber}>
-                  <strong>Parking Slot:</strong> {request.parking_slot_number}
+              <div className={classes.requestContent}>
+                <div className={classes.requestInfo}>
+                  <div className={classes.slotNumber}>
+                    <strong>Parking Slot:</strong> {request.parking_slot_number}
+                  </div>
+                  <div className={classes.studentName}>
+                    <strong>Student Name:</strong> {request.student_name}
+                  </div>
+                  <div className={classes.registrationPlate}>
+                    <strong>Registration Plate:</strong>{' '}
+                    {request.registration_plate || 'N/A'}
+                  </div>
+                  <div className={classes.startDate}>
+                    <strong>Start Date:</strong>{' '}
+                    {new Date(request.start_date).toLocaleDateString()}
+                  </div>
+                  <div className={classes.nrOfDays}>
+                    <strong>Duration:</strong> {request.nr_of_days} day(s)
+                  </div>
+                  <div className={classes.status}>
+                    <strong>Status:</strong> {request.status}
+                  </div>
                 </div>
-                <div className={classes.studentName}>
-                  <strong>Student Name:</strong> {request.student_name}
-                </div>
-                <div className={classes.registrationPlate}>
-                  <strong>Registration Plate:</strong> {request.registration_plate || 'N/A'}
-                </div>
-                <div className={classes.startDate}>
-                  <strong>Start Date:</strong> {new Date(request.start_date).toLocaleDateString()}
-                </div>
-                <div className={classes.nrOfDays}>
-                  <strong>Duration:</strong> {request.nr_of_days} day(s)
-                </div>
-                <div className={classes.status}>
-                  <strong>Status:</strong> {request.status}
+                <div className={classes.actionButtons}>
+                  {request.status === 'Pending' ? (
+                    <>
+                      <button
+                        className={`${classes.iconButton} ${classes.greenButton}`}
+                        onClick={() => handleApprove(request.id)}
+                        title="Approve"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          width="24"
+                          height="24"
+                        >
+                          <path d="M9 16.2l-4.2-4.2-1.4 1.4 5.6 5.6 12-12-1.4-1.4z" />
+                        </svg>
+                      </button>
+                      <button
+                        className={`${classes.iconButton} ${classes.redButton}`}
+                        onClick={() => handleDeny(request.id)}
+                        title="Deny"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          width="24"
+                          height="24"
+                        >
+                          <path d="M12 10.6l-7.1-7.1-1.4 1.4 7.1 7.1-7.1 7.1 1.4 1.4 7.1-7.1 7.1 7.1 1.4-1.4-7.1-7.1 7.1-7.1-1.4-1.4z" />
+                        </svg>
+                      </button>
+                    </>
+                  ) : (
+                    <div className={classes.largeIconWrapper}>
+                      {request.status === 'Approved' && (
+                        <div
+                          className={`${classes.largeIcon} ${classes.greenIcon}`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            width="40"
+                            height="40"
+                          >
+                            <path d="M9 16.2l-4.2-4.2-1.4 1.4 5.6 5.6 12-12-1.4-1.4z" />
+                          </svg>
+                        </div>
+                      )}
+                      {request.status === 'Denied' && (
+                        <div
+                          className={`${classes.largeIcon} ${classes.redIcon}`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            width="40"
+                            height="40"
+                          >
+                            <path d="M12 10.6l-7.1-7.1-1.4 1.4 7.1 7.1-7.1 7.1 1.4 1.4 7.1-7.1 7.1 7.1 1.4-1.4-7.1-7.1 7.1-7.1-1.4-1.4z" />
+                          </svg>
+                        </div>
+                      )}
+                      {request.status === 'ApprovedPending' && (
+                        <div
+                          className={`${classes.largeIcon} ${classes.yellowIcon}`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            width="40"
+                            height="40"
+                          >
+                            <path d="M12 0c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 21.5c-5.2 0-9.5-4.3-9.5-9.5s4.3-9.5 9.5-9.5 9.5 4.3 9.5 9.5-4.3 9.5-9.5 9.5z" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
-              {request.status == "Pending" && <div>
-                <div className={classes.buttons}>
-                    <button
-                    className={classes.approveButton}
-                    onClick={() => handleApprove(request.id)}
-                    >
-                    Approve
-                    </button>
-                    <button
-                    className={classes.denyButton}
-                    onClick={() => handleDeny(request.id)}
-                    >
-                    Deny
-                    </button>
-                </div>
-              </div>}
             </div>
           ))
         ) : (

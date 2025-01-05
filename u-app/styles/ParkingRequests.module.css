@@ -1,74 +1,111 @@
 .container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .pageHeader {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .requestsList {
-    margin-top: 20px;
-  }
-  
-  .requestItem {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .requestInfo {
-    margin-bottom: 10px;
-  }
-  
-  .requestInfo div {
-    margin-bottom: 5px;
-  }
-  
-  .slotNumber,
-  .studentName,
-  .registrationPlate,
-  .startDate,
-  .nrOfDays,
-  .status {
-    font-size: 1rem;
-  }
-  
-  .buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .approveButton,
-  .denyButton {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .approveButton {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .denyButton {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .approveButton:hover {
-    background-color: #218838;
-  }
-  
-  .denyButton:hover {
-    background-color: #c82333;
-  }
-  
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.requestsList {
+  margin-top: 20px;
+}
+
+.requestItem {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.requestContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.requestInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.requestInfo div {
+  font-size: 1rem;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.greenButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.greenButton:hover {
+  background-color: #218838;
+}
+
+.redButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.redButton:hover {
+  background-color: #c82333;
+}
+
+.largeIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.largeIcon {
+  font-size: 3rem;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+}
+
+.greenIcon {
+  background-color: #28a745;
+  color: white;
+}
+
+.redIcon {
+  background-color: #dc3545;
+  color: white;
+}
+
+.yellowIcon {
+  background-color: #ffc107;
+  color: white;
+}

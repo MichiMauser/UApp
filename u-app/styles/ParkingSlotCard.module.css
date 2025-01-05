@@ -46,6 +46,10 @@
     border-color: #f1c40f; /* Bright yellow for pending slots */
     background-color: #fef9e7; /* Light yellow background for subtle feedback */
   }
+  .ownSlot {
+    border-color: #8e44ad; /* Bright purple for available slots */
+    background-color: #f3eafc; /* Light purple background for better feedback */
+  }
   
   .modalOverlay {
     position: fixed;
