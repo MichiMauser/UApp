@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'register_login',
     'w_machine',
     'parking_func',
+    'forum',
     'corsheaders',
     'background_task',
     'django_apscheduler',
@@ -87,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'uapp_database',
         'USER': 'root',
-        'PASSWORD': 'Razvan2004',  #CHANGED BECAUSE CONFLICTS ON MERGE
+        'PASSWORD': 'root',  #CHANGED BECAUSE CONFLICTS ON MERGE
         'HOST': 'localhost',
         'PORT': '3306'
     }

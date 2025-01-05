@@ -23,6 +23,7 @@ urlpatterns = [
     path("home/", include("w_machine.urls")),
     path('register_login/', include('register_login.urls')),# Include the app's URLs
     path('home/', include("parking_func.urls")),
+    path('announcements/', include("forum.urls")),
 ]
 
 
