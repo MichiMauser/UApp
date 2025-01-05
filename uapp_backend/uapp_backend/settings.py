@@ -118,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Bucharest'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -135,4 +135,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
+CORS_ALLOW_HEADERS = ['Content-Type' ]
+CORS_ALLOW_CREDENTIALS = True
+

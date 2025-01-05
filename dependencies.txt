@@ -3,6 +3,9 @@ pip install pymysql
 pip install pillow
 pip install djangorestframework
 pip install django-cors-headers
+pip install django-background-tasks
+pip install django-apscheduler
+pip install pytesseract
 pip install google-auth
 pip install google_auth_oauthlib
 pip install google-api-python-client

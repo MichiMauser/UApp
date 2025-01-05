@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("home/", include("w_machine.urls")),
     path('register_login/', include('register_login.urls')),# Include the app's URLs
-    path('parking_func/', include('parking_func.urls')),
+    path('home/', include("parking_func.urls")),
 ]
 
 
