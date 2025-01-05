@@ -5,6 +5,8 @@ import { motion } from "motion/react";
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from "react-redux";
+import {setLogin} from '../redux/userSlice'
 
 async function postData(data) {
   const response = await fetch('http://127.0.0.1:8000/register_login/login/', {
@@ -50,12 +52,15 @@ async function setSessionCookie(user) {
 
 export default function Login() {
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const { mutate, error, isError, isPending } = useMutation({
     mutationFn: postData,
-    onSuccess: async (user) => {
+    onSuccess: async (data) => {
       try {
-        await setSessionCookie(user);
+        await setSessionCookie(data);
+        dispatch(setLogin({
+          user: data.user,
+        }));
         console.log('Session cookie set! Redirecting...');
         router.push('/home'); 
       } catch (err) {

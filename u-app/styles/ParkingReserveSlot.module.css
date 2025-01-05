@@ -1,0 +1,82 @@
+/* General form container */
+.formContainer {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 50px;
+  background-color: #f9fafb;  /* Light background for modern look */
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for depth */
+}
+
+/* Header */
+.header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2c3e50; /* Darker text for better contrast */
+}
+
+/* Form styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #34495e; /* Slightly muted color for the labels */
+}
+
+.input {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #bdc3c7;  /* Light gray border */
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  border-color: #e74c3c; /* Red shade on focus for better attention */
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.3); /* Soft red glow on focus */
+}
+
+.submitButton {
+  padding: 12px;
+  background-color: #27ae60;  /* Strong red button */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #1e8449;  /* Darker red on hover */
+  transform: scale(1.05);  /* Slight scale effect on hover */
+}
+
+/* Add responsiveness */
+@media (max-width: 600px) {
+  .formContainer {
+    padding: 15px;
+  }
+
+  .header {
+    font-size: 1.6rem;
+  }
+
+  .form {
+    gap: 20px;
+  }
+}
