@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'uapp_database',
         'USER': 'root',
-        'PASSWORD': 'rootadmin',  #CHANGED BECAUSE CONFLICTS ON MERGE
+        'PASSWORD': 'Mancaredepest1',  #CHANGED BECAUSE CONFLICTS ON MERGE
         'HOST': 'localhost',
         'PORT': '3306'
     }
