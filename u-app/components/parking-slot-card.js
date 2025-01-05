@@ -7,7 +7,7 @@ const ParkingSlotCard = ({ parkingInfos, mediator }) => {
     
 
     function getCardStyle() {
-        if(parkingInfos.student_name == user.username) {
+        if(user && parkingInfos.student_name == user.username) {
             return classes.ownSlot
         }
         if(parkingInfos.status == "Available" || parkingInfos.status == "available" ){

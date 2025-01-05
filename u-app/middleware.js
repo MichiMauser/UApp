@@ -48,7 +48,7 @@ export default async function middleware(req) {
   // console.log(session)
 
   try {
-    if(req.nextUrl.pathname.startsWith('/logout') && payloadUser?.user.role){
+    if(req.nextUrl.pathname.startsWith('/logout')){
         
         const response = NextResponse.redirect(new URL('/', req.nextUrl))
         response.cookies.set("token", "",

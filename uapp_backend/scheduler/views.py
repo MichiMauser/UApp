@@ -12,7 +12,7 @@ def start():
 
 def checkSlots():
     all_slots = ParkingSlots.objects.all()
-    print("yesss")
+    # print("yesss")
     for slot in all_slots:
         try:
             pending_request = ParkingRequest.objects.filter(
@@ -34,14 +34,14 @@ def checkSlots():
                     slot.start_date = pending_request.start_date
                     slot.end_date = pending_request.end_date
                     slot.save()
-                    pending_request.status = 'Accepted'
+                    pending_request.status = 'Approved'
                     pending_request.save()
 
                     print(f'Successfully updated parking slot {slot.id} with customer {pending_request.student_name}.')
                 else:
                     print(f'Slot {slot.id} remains available, no valid requests for today.')
 
-            print(f'Checked parking slot {slot.id} successfully.')
+            # print(f'Checked parking slot {slot.id} successfully.')
 
         except Exception as e:
             print(f"Error processing parking slot {slot.id}: {str(e)}")
