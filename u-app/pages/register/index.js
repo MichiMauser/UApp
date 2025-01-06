@@ -8,11 +8,11 @@ import image from '../../public/assets/addImage.png'
 import Image from 'next/image'
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../../lib/firebase';
 
 async function postData(formData){
-    // for (const [key, value] of formData.entries()) {
-    //     console.log(`${key}:`, value);
-    // }
     const response = await fetch('http://127.0.0.1:8000/register_login/register/', {
       method: 'POST',
       body: formData
@@ -42,18 +42,33 @@ export default function RegisterPage() {
 
     const {mutate, error, isError, isPending} = useMutation({
         mutationFn: postData,
-        onSuccess: () => {
-                // console.log("Success!");
+        onSuccess: async (data) => {
+                try {
+                    const email = data.user.email;
+                    const password = data.user.password;
+                    const displayName = data.user.username;
+                    const res = await createUserWithEmailAndPassword(auth, email, password);
+                    
+                    await updateProfile(res.user, {
+                        displayName:displayName,
+                    });
+                    await setDoc(doc(db, "users", res.user.uid), {
+                        uid: res.user.uid,
+                        displayName:displayName,
+                        email:email,
+                    });
+                    await setDoc(doc(db, "userChats", res.user.uid), {});
+                } catch (error) {
+                    console.log(error);
+                }
                 router.push('/')
-            }
-      })
+        }})
     
-      function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault()
         const formData = new FormData(event.target);
         mutate(formData);
-      }
-      
+    }  
 
     return (
         <div className={classes.register}>
@@ -77,7 +92,7 @@ export default function RegisterPage() {
                         />
                     </label>
                     <motion.button whileHover={{scale:1.05}} transition={{type:'tween'}} className={classes.button} disabled={isPending}>{isPending ? "Registering" : "Register"}</motion.button>
-                    {isError ? <p className={classes.error_message}>{`*${error.info?.message}*`}</p>: undefined}
+                    {isError ? <p className={classes.error_message}>{`*${error.error}*`}</p>: undefined}
                 </form>
                 <Link className={classes.link} href={'/'}>Already have an account? Click here</Link>
             </motion.div>

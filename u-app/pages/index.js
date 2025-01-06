@@ -7,6 +7,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from "react-redux";
 import {setLogin} from '../redux/userSlice'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../lib/firebase';
 
 async function postData(data) {
   const response = await fetch('http://127.0.0.1:8000/register_login/login/', {
@@ -58,6 +60,7 @@ export default function Login() {
     onSuccess: async (data) => {
       try {
         await setSessionCookie(data);
+        await signInWithEmailAndPassword(auth,data.user.email, data.user.password)
         dispatch(setLogin({
           user: data.user,
         }));

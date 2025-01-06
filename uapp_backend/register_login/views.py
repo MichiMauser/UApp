@@ -19,7 +19,7 @@ def parseFile(file):
             'real_name': 'mock',
             'birthday': '1990-01-01',
             'gender': 'M',
-            'password': 'mock'
+            'password': 'Paineculapte123@'
         }
 
 
