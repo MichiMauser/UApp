@@ -23,7 +23,7 @@ def create_announcement(request):
             # Parse the incoming JSON data
             data = json.loads(request.body.decode('utf-8'))
         except json.JSONDecodeError:
-            return Response({'error': 'Invalid JSON data.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'success': False, 'error': 'Invalid JSON data.'}, status=status.HTTP_400_BAD_REQUEST)
         print(data)
         # Get the data from the request body
         title = data.get('title')
@@ -32,7 +32,7 @@ def create_announcement(request):
         author = data.get('author')
         # Validate the required fields
         if not title or not content or not author:
-            return Response({'error': 'All fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'success': False, 'error': 'All fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Create the new Announcement object
         announcement = Announcement(
