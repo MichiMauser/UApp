@@ -30,12 +30,6 @@ export default function Navbar(){
                 <Image className={classes.img} src={logo} alt="logo" />
             </motion.div>
         </Link>
-        <div className={classes.search}>
-            <motion.input type='text' placeholder='Search...' whileFocus={{scale:1.05}} onChange={handleChange}/>
-            <IconButton className={classes.searchButton}>
-                <Search sx={{color: common.black }} ></Search>
-            </IconButton>
-        </div>
         <div className={classes.options}>
             <motion.button className={classes.dropdown_menu} whileHover={{scale: 1.05}} onClick={() => {setShowMenu((prevState) => !prevState)}}>
                 <Menu sx={{color: grey[800]}} />
