@@ -60,7 +60,7 @@ export default function Login() {
     onSuccess: async (data) => {
       try {
         await setSessionCookie(data);
-        await signInWithEmailAndPassword(auth,data.user.email, data.user.password)
+        // await signInWithEmailAndPassword(auth,data.user.email, data.user.password)
         dispatch(setLogin({
           user: data.user,
         }));
