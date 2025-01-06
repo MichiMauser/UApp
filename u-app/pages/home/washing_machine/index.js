@@ -3,9 +3,68 @@ import Head from 'next/head';
 import { motion } from 'framer-motion'
 import Link from 'next/link';
 import { useState } from "react";
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import classes from '../../../styles/Washing_machinePage.module.css'
+import { useSelector } from 'react-redux'
+
+async function getReservationData(){
+
+    const response = await fetch('http://127.0.0.1:8000/home/washer/get_reservations');
+
+    if (!response.ok) {
+      const error = new Error('An error occurred while getting washing data');
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    const result = await response.json();
+    return result;
+}
+
+async function sendReservationData(formData){
+
+    const response = await fetch('http://127.0.0.1:8000/home/washer/',
+        {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+        }
+    );
+
+    if (!response.ok) {
+      const error = new Error('An error occurred while sending washing data');
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    const result = await response.json();
+    return result;
+}
+
+async function sendDeleteReservationData(formData){
+
+    const response = await fetch('http://127.0.0.1:8000/home/washer/del_reservation',
+        {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+        }
+    );
+
+    if (!response.ok) {
+      const error = new Error('An error occurred while sending delete washing data');
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    const result = await response.json();
+    return result;
+}
 
 export default function Washing_machine(){
 
@@ -14,15 +73,42 @@ export default function Washing_machine(){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
     const [selectedSlot, setSelectedSlot] = useState(null);
+    const [roomNumber, setRoomNumber] = useState('');
+    const {user} = useSelector((state) => state.user)
 
-    // Mock data for reserved slots
-    const myRoomNumber = 2354;
 
-    const reservedSlots = [
-        { date: "2024-12-27", timeIndex: 1, roomNumber: 3532 }, // Example: Reserved for 10:00 - 12:00 on Dec 27, 2024
-        { date: "2024-12-28", timeIndex: 3, roomNumber: 7339 }, // Example: Reserved for 14:00 - 16:00 on Dec 28, 2024
-        { date: "2024-12-29", timeIndex: 5, roomNumber: 2354 }, // Example: Reserved for 18:00 - 20:00 on Dec 29, 2024
-    ];
+    const { data: reservedSlots2, error, isError, isLoading } = useQuery({
+        queryFn: getReservationData,
+        queryKey: ['washing_machine'],
+        staleTime: 100,
+      });
+    
+    const { mutate, error: error2, isError: isError2, isPending } = useMutation({
+        mutationFn: sendReservationData,
+        onSuccess: () => {
+          router.push('/');
+        },
+      });
+
+    const { mutate:mutate2, error: error3, isError: isError3, isPendin:isPending2 } = useMutation({
+        mutationFn: sendDeleteReservationData,
+        onSuccess: () => {
+          router.push('/home/washing/');
+        },
+    });
+    
+    const reservedSlots = reservedSlots2 ? reservedSlots2.map((slot) => {
+        const date = new Date(slot.date);
+        const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+
+        return {
+          date: formattedDate,
+          roomNumber: slot.room_nr,
+          timeIndex: slot.time_frame,
+          username: slot.username,
+        };
+    }) : [];
+
 
     // Week grid
     const daysOfWeek = [
@@ -63,16 +149,25 @@ export default function Washing_machine(){
         return `${startDay} ${startMonth} - ${endDay} ${endMonth}`;
     };
 
-    //cell clicked stuff
-    const handleCellClick = (dayIndex, slotIndex) => {
+    function formatDateForDayIndex(dayIndex) {
         const date = getDateForDay(dayIndex);
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0'); 
-        const fullDate = `${year}-${month}-${day}`; 
         
+        return `${year}-${month}-${day}`;
+    }
+    
+
+    //cell clicked stuff
+    const handleCellClick = (dayIndex, slotIndex) => {
+        const fullDate = formatDateForDayIndex(dayIndex);
+        
+        console.log(reservedSlots[0].timeIndex + "\n" + slotIndex + "\n");
+        console.log(reservedSlots[0].date + "\n" + fullDate + "\n");
+        console.log(reservedSlots[0].username + "\n" + user.username + "\n");
         const isMyReservation = reservedSlots.some(
-            (slot) => slot.date === fullDate && slot.timeIndex === slotIndex && slot.roomNumber === myRoomNumber
+            (slot) => slot.date === fullDate && slot.timeIndex === slotIndex && slot.username === user.username
         );
         
         if (isMyReservation) {
@@ -84,9 +179,27 @@ export default function Washing_machine(){
         }
     };
 
-    const confirmReservation = () => {
+    function handleRoomNumberChange(event) {
+        setRoomNumber(event.target.value);
+    }
+
+    function handleConfirmReservation() {
+        if (roomNumber.trim() === '') {
+            alert('Please enter a valid room number');
+            return;
+        }
+        confirmReservation(roomNumber);
+    }
+
+    const confirmReservation = (roomNumber) => {
         alert(`Reservation made for ${daysOfWeek[selectedSlot.dayIndex]} at ${timeSlots[selectedSlot.slotIndex]}`);
-        console.log(selectedSlot.fullDate);
+        const newConfirmation = {
+            "time_frame" : selectedSlot.slotIndex,
+            "date": selectedSlot.fullDate + " 00:00:00.000000",
+            "username": user.username,
+            "room_nr": roomNumber
+        }
+        mutate(newConfirmation);
         setIsModalOpen(false); 
     };
 
@@ -97,31 +210,27 @@ export default function Washing_machine(){
 
     // Check if a cell is reserved
     const isReserved = (dayIndex, slotIndex) => {
-        const date = getDateForDay(dayIndex);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const fullDate = `${year}-${month}-${day}`;
-
+        const fullDate = formatDateForDayIndex(dayIndex);
         return reservedSlots.some(slot => slot.date === fullDate && slot.timeIndex === slotIndex);
     };
 
     // If it is my reservation clicked
     const isMyReservation = (dayIndex, slotIndex) => {
-        const date = getDateForDay(dayIndex);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const fullDate = `${year}-${month}-${day}`;
-
+        const fullDate = formatDateForDayIndex(dayIndex);
         return reservedSlots.some(
-            (slot) => slot.date === fullDate && slot.timeIndex === slotIndex && slot.roomNumber === myRoomNumber
+            (slot) => slot.date === fullDate && slot.timeIndex === slotIndex && slot.username === user.username
         );
     };
 
     const removeReservation = () => {
         alert(`Reservation canceled for ${daysOfWeek[selectedSlot.dayIndex]} at ${timeSlots[selectedSlot.slotIndex]}`);
-        console.log(selectedSlot.fullDate);
+        console.log(selectedSlot.slotIndex);
+        const reservation_toBe_Removed = {
+            "time_frame" : selectedSlot.slotIndex,
+            "date": selectedSlot.fullDate + " 00:00:00.000000",
+            "username": user.username,
+        }
+        mutate2(reservation_toBe_Removed);
         setIsCancelModalOpen(false); 
     }
 
@@ -134,11 +243,22 @@ export default function Washing_machine(){
             <div className={classes.modalContent}>
                 <h3>Are you sure you want to reserve the washing machine?</h3>
                 <p>Time: {timeSlots[selectedSlot.slotIndex]} on {daysOfWeek[selectedSlot.dayIndex]}</p>
+                <div className={classes.inputContainer}>
+                            <label htmlFor="roomNumber">Enter your room number:</label>
+                            <input
+                                type="text"
+                                id="roomNumber"
+                                value={roomNumber}
+                                onChange={handleRoomNumberChange}
+                                className={classes.input}
+                                placeholder="e.g., 1234"
+                            />
+                </div>
                 <motion.div className={classes.modalButtons}>
                     <motion.button whileHover={{ scale: 1.05}} transition={{ type: 'tween' }} 
                         onClick={cancelReservation}>No</motion.button>
                     <motion.button whileHover={{ scale: 1.05}} transition={{ type: 'tween' }} 
-                        onClick={confirmReservation}>Yes</motion.button>
+                        onClick={handleConfirmReservation}>Yes</motion.button>
                         
                 </motion.div>
             </div>

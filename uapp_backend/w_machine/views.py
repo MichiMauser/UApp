@@ -45,10 +45,13 @@ def delete_reservation(request):
     if request.method == 'DELETE':
         username = request.data.get("username")
         time_slot = request.data.get("time_frame")
-        if not username and not time_slot:
+        date = request.data.get("date")
+        
+        
+        if not username and not time_slot and not date:
             return Response({"success": False, 'error': "Can't delete others reservation"}, status=status.HTTP_401_UNAUTHORIZED)
         
-        reservation = Booking.objects.filter(username=username, time_frame=time_slot).first()
+        reservation = Booking.objects.filter(username=username, time_frame=time_slot, date=date).first()
 
         if not reservation:
             return Response({"success": False, "error": "Can't delete an inexistent reservation"}, status=status.HTTP_403_FORBIDDEN)

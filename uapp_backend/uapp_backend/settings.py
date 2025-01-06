@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'register_login',
     'w_machine',
     'parking_func',
+    'forum',
     'corsheaders',
     'background_task',
     'django_apscheduler',
