@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import Layout from "../../components/layout"
 
 export default function Home(){
+    // console.log('Redux state after setting currentUid:', useSelector((state) => state.chat));
     return <>
         <p>Work in progress</p>
     </>

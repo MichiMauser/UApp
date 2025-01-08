@@ -5,10 +5,12 @@ import { motion } from "motion/react";
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from "react-redux";
-import {setLogin} from '../redux/userSlice'
+import { useDispatch, useSelector } from "react-redux";
+import {setLogin, userSlice} from '../redux/userSlice'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../lib/firebase';
+import {chatSlice, setCurrUid} from '../redux/chatSlice';
+import { getCurrentUserUid } from '../components/chats';
 
 async function postData(data) {
   const response = await fetch('http://127.0.0.1:8000/register_login/login/', {
@@ -61,9 +63,17 @@ export default function Login() {
       try {
         await setSessionCookie(data);
         await signInWithEmailAndPassword(auth,data.user.email, data.user.password)
+        const currentId = await getCurrentUserUid(data.user)
+        
         dispatch(setLogin({
           user: data.user,
         }));
+
+        dispatch(setCurrUid({
+          userCurrId: currentId
+        }));
+       
+        
         console.log('Session cookie set! Redirecting...');
         router.push('/home'); 
       } catch (err) {
