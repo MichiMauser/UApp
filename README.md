@@ -1,4 +1,4 @@
-# UApp
+# UApp register_login
 
 # API Documentation
 
@@ -106,5 +106,114 @@ Example error response (password mismatch):
 {
     "success": false,
     "error": "Passwords do not match"
+}
+```
+
+
+
+# UApp forum
+
+# API Documentation
+
+This API allows users to retrieve and create announcements. It provides functionality to fetch all announcements as well as create new ones with the option to specify the type (News, Event, or Alert).
+
+## Base URL
+
+The base URL for the API is:
+http://127.0.0.1:8000/forum
+
+
+## Endpoints
+
+### 1. **Get All Announcements**
+
+**Endpoint:** `GET /getAnnouncements/`
+
+#### Request
+
+This endpoint accepts a GET request and does not require any parameters.
+
+#### Response
+
+On success, the server responds with a JSON object containing a list of all announcements:
+
+Example response (success):
+
+```json
+{
+    "success": true,
+    "announcements": [
+        {
+            "id": 1,
+            "title": "Announcement Title",
+            "content": "The content of the announcement.",
+            "author": "Author Name",
+            "type": "news",
+            "created_at": "2025-01-06T00:00:00Z"
+        },
+        ...
+    ]
+}
+```
+On failure, the response will indicate an internal error:
+
+Example error response:
+
+```json
+{
+    "success": false,
+    "error": "An error occurred while fetching the announcements."
+}
+```
+
+### 2. ** Create a New Announcement**
+
+**Endpoint:** `POST /createAnnouncement/`
+
+#### Request
+
+This endpoint accepts a POST request with the following JSON body:
+
+- `title` (string, required): The title of the announcement.
+- `content` (string, required): The content of the announcement.
+- `author` (string, required): The name of the author of the announcement.
+- `type` (string, optional): The type of the announcement, can be 'news', 'event', or 'alert'. Defaults to 'news'.
+
+Example Request Body:
+```json
+{
+    "title": "Announcement Title",
+    "content": "This is the content of the announcement.",
+    "author": "John Doe",
+    "type": "event"
+}
+```
+
+#### Response
+
+On successful creation, the server responds with the data of the created announcement:
+
+Example response (success):
+```json
+{
+    "success": true,
+    "announcement": {
+        "id": 1,
+        "title": "Announcement Title",
+        "content": "The content of the announcement.",
+        "author": "John Doe",
+        "type": "event",
+        "created_at": "2025-01-06T00:00:00Z"
+    }
+}
+```
+
+If the required fields are missing or there is an issue, the server will return an error response:
+
+Example error response (missing fields):
+```json
+{
+    "success": false,
+    "error": "All fields are required."
 }
 ```

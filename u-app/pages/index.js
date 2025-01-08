@@ -5,11 +5,11 @@ import { motion } from "motion/react";
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from "react-redux";
-import {setLogin, userSlice} from '../redux/userSlice'
+import { useDispatch } from "react-redux";
+import { setLogin } from '../redux/userSlice';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../lib/firebase';
-import {chatSlice, setCurrUid} from '../redux/chatSlice';
+import { setCurrUid } from '../redux/chatSlice';
 import { getCurrentUserUid } from '../components/chats';
 
 async function postData(data) {
@@ -61,10 +61,16 @@ export default function Login() {
     mutationFn: postData,
     onSuccess: async (data) => {
       try {
+        // Set session cookie
         await setSessionCookie(data);
-        await signInWithEmailAndPassword(auth,data.user.email, data.user.password)
-        const currentId = await getCurrentUserUid(data.user)
         
+        // Sign in with Firebase authentication
+        await signInWithEmailAndPassword(auth, data.user.email, data.user.password);
+        
+        // Get the current user UID
+        const currentId = await getCurrentUserUid(data.user);
+        
+        // Dispatch actions to store user data and current user UID
         dispatch(setLogin({
           user: data.user,
         }));
@@ -72,8 +78,8 @@ export default function Login() {
         dispatch(setCurrUid({
           userCurrId: currentId
         }));
-       
         
+        // Log success and redirect
         console.log('Session cookie set! Redirecting...');
         router.push('/home'); 
       } catch (err) {
