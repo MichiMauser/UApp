@@ -7,6 +7,7 @@ import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import classes from '../../../styles/Washing_machinePage.module.css'
 import { useSelector } from 'react-redux'
+import { queryClient } from "../../../lib/queryclient";
 
 async function getReservationData(){
 
@@ -86,6 +87,7 @@ export default function Washing_machine(){
     const { mutate, error: error2, isError: isError2, isPending } = useMutation({
         mutationFn: sendReservationData,
         onSuccess: () => {
+          queryClient.invalidateQueries({queryKey: ["washing_machine"]})
           router.push('/');
         },
       });
@@ -93,6 +95,7 @@ export default function Washing_machine(){
     const { mutate:mutate2, error: error3, isError: isError3, isPendin:isPending2 } = useMutation({
         mutationFn: sendDeleteReservationData,
         onSuccess: () => {
+          queryClient.invalidateQueries({queryKey: ["washing_machine"]})
           router.push('/home/washing/');
         },
     });
