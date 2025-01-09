@@ -163,9 +163,9 @@ export default function Washing_machine(){
     const handleCellClick = (dayIndex, slotIndex) => {
         const fullDate = formatDateForDayIndex(dayIndex);
         
-        console.log(reservedSlots[0].timeIndex + "\n" + slotIndex + "\n");
-        console.log(reservedSlots[0].date + "\n" + fullDate + "\n");
-        console.log(reservedSlots[0].username + "\n" + user.username + "\n");
+        // console.log(reservedSlots[0].timeIndex + "\n" + slotIndex + "\n");
+        // console.log(reservedSlots[0].date + "\n" + fullDate + "\n");
+        // console.log(reservedSlots[0].username + "\n" + user.username + "\n");
         const isMyReservation = reservedSlots.some(
             (slot) => slot.date === fullDate && slot.timeIndex === slotIndex && slot.username === user.username
         );

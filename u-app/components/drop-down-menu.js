@@ -31,9 +31,11 @@ export default function DropDownMenu() {
             animate={{ opacity: 1, y: 20 }}
             exit={{ opacity: 0, y: 0 }}
         >
-            <Link href={`${user?.role === "Student" ? '/home/parking' : '/adminDashboard/parking'}`}>Parking reservations</Link>
-            <Link href={`${user?.role === "Student" ? '/home/chat-app' : '/adminDashboard'}`}>Conversations</Link>
-            <Link href={`${user?.role === "Student" ? '/home/washing_machine' : '/adminDashboard'}`}>Washing machine</Link>
+            {user?.role === "Student" && <Link href={'/home/parking'}>Parking reservations</Link>}
+            {user?.role === "Admin" && <Link href={'/adminDashboard/parking'}>Parking administration</Link>}
+            {user?.role === "Admin" && <Link href={'/adminDashboard'}>Forum announcements</Link>}
+            {user?.role === "Student" &&<Link href={'/home/chat-app'}>Conversations</Link>}
+            {user?.role === "Student" &&<Link href={'/home/washing_machine'}>Washing machine</Link>}
             <Link href="/logout" onClick={handleLogout}>Log Out</Link>
         </motion.div>
     )

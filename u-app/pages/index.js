@@ -62,16 +62,12 @@ export default function Login() {
     mutationFn: postData,
     onSuccess: async (data) => {
       try {
-        // Set session cookie
         await setSessionCookie(data);
         
-        // Sign in with Firebase authentication
         await signInWithEmailAndPassword(auth, data.user.email, data.user.password);
         
-        // Get the current user UID
         const currentId = await getCurrentUserUid(data.user);
         
-        // Dispatch actions to store user data and current user UID
         dispatch(setLogin({
           user: data.user,
         }));
@@ -80,7 +76,6 @@ export default function Login() {
           userCurrId: currentId
         }));
         
-        // Log success and redirect
         console.log('Session cookie set! Redirecting...');
         router.push('/home'); 
       } catch (err) {
